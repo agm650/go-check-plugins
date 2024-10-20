@@ -5,7 +5,6 @@ import (
 	"encoding/pem"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"net"
 	"os"
 	"strconv"
@@ -63,7 +62,7 @@ func decrypt(block *pem.Block, passphrase string) (*pem.Block, error) {
 }
 
 func readPrivateKey(file, passphrase string) ([]byte, error) {
-	privateKey, err := ioutil.ReadFile(file)
+	privateKey, err := os.ReadFile(file)
 	if err != nil {
 		return nil, err
 	}
@@ -137,7 +136,7 @@ func (opts *sshOpts) run() *checkers.Checker {
 	if err != nil {
 		if addrerr, ok := err.(*net.AddrError); ok {
 			if addrerr.Timeout() {
-				elapsed := time.Now().Sub(start)
+				elapsed := time.Since(start)
 				return opts.checkTimeoutError(elapsed, err)
 			} else if addrerr.Temporary() {
 				return checkers.Warning(err.Error())
@@ -153,7 +152,7 @@ func (opts *sshOpts) run() *checkers.Checker {
 	if err != nil {
 		return checkers.Unknown(err.Error())
 	}
-	elapsed := time.Now().Sub(start)
+	elapsed := time.Since(start)
 	return opts.checkTimeout(elapsed)
 }
 

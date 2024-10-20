@@ -1,4 +1,4 @@
-VERSION = 0.41.2
+VERSION = 0.45.0
 CURRENT_REVISION = $(shell git rev-parse --short HEAD)
 ifeq ($(OS),Windows_NT)
 GOPATH_ROOT:=$(shell cygpath ${GOPATH})
@@ -12,34 +12,24 @@ export GO111MODULE=on
 all: clean testconvention test build rpm deb
 
 .PHONY: test
-test: lint
+test:
 	go test $(TESTFLAGS) ./...
 	./test.bash
 
-.PHONY: devel-deps
-devel-deps:
-	cd && go get golang.org/x/lint/golint  \
-	  github.com/mattn/goveralls
-
 .PHONY: lint
-lint: devel-deps
-	go vet ./...
-	golint -set_exit_status ./...
+lint:
+	golangci-lint run
 
 .PHONY: testconvention
 testconvention:
 	prove -r t/
 	@go generate ./... && git diff --exit-code -- . ':(exclude)go.*' || (echo 'please `go generate ./...` and commit them' && false)
 
-.PHONY: cover
-cover: devel-deps
-	go test -race -covermode atomic -coverprofile=.profile.cov ./...
-
 .PHONY: build
 build:
 	mkdir -p build
 	for i in $(filter-out check-windows-%, $(wildcard check-*)); do \
-	  go build -ldflags "-s -w" -o build/$$i \
+	  CGO_ENABLED=0 go build -ldflags "-s -w" -o build/$$i \
 	  `pwd | sed -e "s|${GOPATH_ROOT}/src/||"`/$$i; \
 	done
 
@@ -58,14 +48,7 @@ depends_on:
 	@:
 
 .PHONY: rpm
-rpm: rpm-v1 rpm-v2
-
-.PHONY: rpm-v1
-rpm-v1:
-	make build GOOS=linux GOARCH=386
-	rpmbuild --define "_sourcedir `pwd`"  --define "_version ${VERSION}" --define "buildarch noarch" --target noarch -bb packaging/rpm/mackerel-check-plugins.spec
-	make build GOOS=linux GOARCH=amd64
-	rpmbuild --define "_sourcedir `pwd`"  --define "_version ${VERSION}" --define "buildarch x86_64" --target x86_64 -bb packaging/rpm/mackerel-check-plugins.spec
+rpm: rpm-v2
 
 .PHONY: rpm-v2
 rpm-v2: rpm-v2-x86 rpm-v2-arm
@@ -91,18 +74,7 @@ rpm-v2-arm:
 	  --target aarch64 -bb packaging/rpm/mackerel-check-plugins-v2.spec
 
 .PHONY: deb
-deb: deb-v1 deb-v2
-
-.PHONY: deb-v1
-deb-v1:
-	make build GOOS=linux GOARCH=386
-	for i in `cat packaging/deb/debian/source/include-binaries`; do \
-	  cp build/`basename $$i` packaging/deb/debian/; \
-	done
-	cd packaging/deb && debuild --no-tgz-check -rfakeroot -uc -us
-
-.PHONY: deb-v2
-deb-v2: deb-v2-x86 deb-v2-arm
+deb: deb-v2-x86 deb-v2-arm
 
 .PHONY: deb-v2-x86
 deb-v2-x86:

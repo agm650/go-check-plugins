@@ -8,7 +8,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"os/signal"
@@ -354,6 +353,15 @@ func (opts *logOpts) searchReader(ctx context.Context, rdr io.Reader) (warnNum, 
 		readBytes += int64(len(lineBytes))
 
 		if opts.decoder != nil {
+			if opts.Encoding == "UTF-16le" {
+				// Separating UTF-16 little endian lines by byte 0x0a ("\n")
+				// leaves 0x00 at the beginning of second line onwards. Remove it.
+				if lineBytes[0] == 0x00 {
+					lineBytes = lineBytes[1:]
+				}
+				// Since it ends with 0x0a, use 0x0a 0x00 as UTF-16 little endian
+				lineBytes = append(lineBytes, 0x00)
+			}
 			lineBytes, err = opts.decoder.Bytes(lineBytes)
 			if err != nil {
 				break
@@ -436,7 +444,7 @@ func parseFilePattern(directory, filePattern string, caseInsensitive bool) ([]st
 		return nil, fmt.Errorf("file-pattern is invalid")
 	}
 
-	fileInfos, err := ioutil.ReadDir(dirStr)
+	fileInfos, err := os.ReadDir(dirStr)
 	if err != nil {
 		return nil, fmt.Errorf("cannot read the directory:" + err.Error())
 	}
@@ -461,7 +469,7 @@ type state struct {
 
 func loadState(fname string) (*state, error) {
 	state := &state{}
-	b, err := ioutil.ReadFile(fname)
+	b, err := os.ReadFile(fname)
 	if err != nil {
 		if os.IsNotExist(err) {
 			return nil, nil
@@ -514,7 +522,7 @@ func getBytesToSkip(f string) (int64, error) {
 }
 
 func getBytesToSkipOld(f string) (int64, error) {
-	b, err := ioutil.ReadFile(f)
+	b, err := os.ReadFile(f)
 	if err != nil {
 		if os.IsNotExist(err) {
 			return 0, errValidStateFileNotFound
@@ -556,11 +564,15 @@ func saveState(f string, state *state) error {
 var errFileNotFoundByInode = fmt.Errorf("old file not found")
 
 func findFileByInode(inode uint, dir string) (string, error) {
-	fis, err := ioutil.ReadDir(dir)
+	entries, err := os.ReadDir(dir)
 	if err != nil {
 		return "", err
 	}
-	for _, fi := range fis {
+	for _, entry := range entries {
+		fi, err := entry.Info()
+		if err != nil {
+			return "", err
+		}
 		if detectInode(fi) == inode {
 			return filepath.Join(dir, fi.Name()), nil
 		}

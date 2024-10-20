@@ -4,7 +4,6 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"time"
 
@@ -20,20 +19,24 @@ type certOpts struct {
 
 // Do the plugin
 func Do() {
-	ckr := checkCertExpiration()
+	ckr := Run(os.Args[1:])
 	ckr.Name = "CERT Expiry"
 	ckr.Exit()
 }
 
-func checkCertExpiration() *checkers.Checker {
-	opts := certOpts{}
-	psr := flags.NewParser(&opts, flags.Default)
-	_, err := psr.Parse()
+func parseArgs(args []string) (*certOpts, error) {
+	opts := &certOpts{}
+	_, err := flags.ParseArgs(opts, args)
+	return opts, err
+}
+
+func Run(args []string) *checkers.Checker {
+	opts, err := parseArgs(args)
 	if err != nil {
 		os.Exit(1)
 	}
 
-	cfByte, err := ioutil.ReadFile(opts.CertFile)
+	cfByte, err := os.ReadFile(opts.CertFile)
 	if err != nil {
 		return checkers.Critical(err.Error())
 	}

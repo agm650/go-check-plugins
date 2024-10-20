@@ -24,7 +24,7 @@ mackerel.io check plugins
 
 %{__install} -m0755 %{_sourcedir}/build/mackerel-check %{buildroot}%{__targetdir}/
 
-for i in aws-cloudwatch-logs aws-sqs-queue-size cert-file disk elasticsearch file-age file-size http jmx-jolokia ldap load log mailq masterha memcached mysql ntpoffset ping postgresql procs redis smtp solr ssh ssl-cert tcp uptime; do \
+for i in aws-cloudwatch-logs aws-sqs-queue-size cert-file disk dns elasticsearch file-age file-size http jmx-jolokia ldap load log mailq masterha memcached mysql ntpoffset ping postgresql procs redis smtp solr ssh ssl-cert tcp uptime; do \
     ln -s ./mackerel-check %{buildroot}%{__targetdir}/check-$i; \
 done
 
@@ -36,6 +36,128 @@ done
 %{__targetdir}/*
 
 %changelog
+* Fri Sep 22 2023 <mackerel-developers@hatena.ne.jp> - 0.45.0
+- Bump golang.org/x/crypto from 0.6.0 to 0.13.0 (by dependabot[bot])
+- Bump github.com/shirou/gopsutil/v3 from 3.23.1 to 3.23.8 (by dependabot[bot])
+- [check-tcp] Supports option to monitor that ports are closed. (by tukaelu)
+- Improve ntservice (by tukaelu)
+- Remove old rpm packaging (by yseto)
+- Bump github.com/aws/aws-sdk-go from 1.44.199 to 1.44.271 (by dependabot[bot])
+- Bump actions/setup-go from 3 to 4 (by dependabot[bot])
+- Bump github.com/mackerelio/go-osstat from 0.2.3 to 0.2.4 (by dependabot[bot])
+
+* Thu Jul 13 2023 <mackerel-developers@hatena.ne.jp> - 0.44.1
+- added build tests. (by yseto)
+
+* Mon Feb 27 2023 <mackerel-developers@hatena.ne.jp> - 0.44.0
+- Bump github.com/stretchr/testify from 1.8.1 to 1.8.2 (by dependabot[bot])
+- fix gosimple, ineffassign (by wafuwafu13)
+- Bump github.com/containerd/containerd from 1.6.14 to 1.6.18 (by dependabot[bot])
+- check-dns: add `expected-string` option (by wafuwafu13)
+- Bump github.com/aws/aws-sdk-go from 1.44.189 to 1.44.199 (by dependabot[bot])
+- Bump golang.org/x/crypto from 0.5.0 to 0.6.0 (by dependabot[bot])
+- Bump github.com/fsouza/go-dockerclient from 1.9.3 to 1.9.4 (by dependabot[bot])
+- Bump golang.org/x/text from 0.6.0 to 0.7.0 (by dependabot[bot])
+- Bump golang.org/x/sys from 0.4.0 to 0.5.0 (by dependabot[bot])
+- added dns plugin on package (by yseto)
+- Remove `circle.yml` (by wafuwafu13)
+- Bump github.com/shirou/gopsutil/v3 from 3.22.12 to 3.23.1 (by dependabot[bot])
+- Add check-dns plugin (by wafuwafu13)
+
+* Wed Feb 1 2023 <mackerel-developers@hatena.ne.jp> - 0.43.0
+- fix generate docs (by yseto)
+- Bump actions/checkout from 2 to 3 (by dependabot[bot])
+- Bump actions/setup-go from 2 to 3 (by dependabot[bot])
+- Bump actions/cache from 2 to 3 (by dependabot[bot])
+- Bump actions/upload-artifact from 2 to 3 (by dependabot[bot])
+- Bump actions/download-artifact from 2 to 3 (by dependabot[bot])
+- Bump github.com/aws/aws-sdk-go from 1.44.157 to 1.44.189 (by dependabot[bot])
+- Enables Dependabot version updates for GitHub Actions (by Arthur1)
+- Stop build for apt v1 (by Arthur1)
+- Bump github.com/fsouza/go-dockerclient from 1.9.0 to 1.9.3 (by dependabot[bot])
+- [check-http] add test.sh (by lufia)
+- check-ssl-cert: add `ca-file`, `cert-file`, `key-file`, `no-check-certificate` options (by wafuwafu13)
+- Bump golang.org/x/text from 0.5.0 to 0.6.0 (by dependabot[bot])
+- Bump golang.org/x/crypto from 0.4.0 to 0.5.0 (by dependabot[bot])
+- Bump github.com/shirou/gopsutil/v3 from 3.22.11 to 3.22.12 (by dependabot[bot])
+- Bump github.com/go-sql-driver/mysql from 1.6.0 to 1.7.0 (by dependabot[bot])
+
+* Wed Jan 18 2023 <mackerel-developers@hatena.ne.jp> - 0.42.4
+- check-cert-file: add test (by wafuwafu13)
+- test: use `T.TempDir` to create temporary test directory (by Juneezee)
+- combine lint, lint-windows, fix test on windows. (by yseto)
+- added compile option, fix packaging format (by yseto)
+- Update dependencies (by lufia)
+- Bump github.com/aws/aws-sdk-go from 1.44.116 to 1.44.157 (by dependabot[bot])
+
+* Thu Oct 20 2022 <mackerel-developers@hatena.ne.jp> - 0.42.3
+- Bump golang.org/x/text from 0.3.7 to 0.4.0 (by dependabot[bot])
+- Bump github.com/aws/aws-sdk-go from 1.44.56 to 1.44.116 (by dependabot[bot])
+- Bump github.com/fsouza/go-dockerclient from 1.8.3 to 1.9.0 (by dependabot[bot])
+- use Go 1.19 on build (by yseto)
+- Bump github.com/shirou/gopsutil/v3 from 3.22.2 to 3.22.9 (by dependabot[bot])
+- Bump github.com/lib/pq from 1.10.6 to 1.10.7 (by dependabot[bot])
+- Bump github.com/mackerelio/checkers from 0.0.3 to 0.0.4 (by dependabot[bot])
+- [uptime] rewite to testable and add test (by wafuwafu13)
+- go.mod from 1.16 to 1.18 (by yseto)
+- added test check-file-age (by yseto)
+- added test check-file-size (by yseto)
+- Bump github.com/mackerelio/go-osstat from 0.2.2 to 0.2.3 (by dependabot[bot])
+- Bump github.com/fsouza/go-dockerclient from 1.8.1 to 1.8.3 (by dependabot[bot])
+- Bump github.com/go-ldap/ldap/v3 from 3.4.3 to 3.4.4 (by dependabot[bot])
+- Improve tests for check-mysql (by susisu)
+
+* Wed Jul 27 2022 <mackerel-developers@hatena.ne.jp> - 0.42.2
+- Ignores fuse.portal partitions (by lufia)
+- Bump github.com/aws/aws-sdk-go from 1.44.37 to 1.44.56 (by dependabot[bot])
+- Bump github.com/gomodule/redigo from 1.8.8 to 1.8.9 (by dependabot[bot])
+- Bump github.com/stretchr/testify from 1.7.1 to 1.8.0 (by dependabot[bot])
+- Bump github.com/fsouza/go-dockerclient from 1.7.10 to 1.8.1 (by dependabot[bot])
+- Bump github.com/lib/pq from 1.10.4 to 1.10.6 (by dependabot[bot])
+- Bump github.com/jmoiron/sqlx from 1.3.4 to 1.3.5 (by dependabot[bot])
+- Bump github.com/go-ldap/ldap/v3 from 3.4.2 to 3.4.3 (by dependabot[bot])
+
+* Wed Jun 22 2022 <mackerel-developers@hatena.ne.jp> - 0.42.1
+- Bump github.com/aws/aws-sdk-go from 1.43.26 to 1.44.37 (by dependabot[bot])
+
+* Wed Mar 30 2022 <mackerel-developers@hatena.ne.jp> - 0.42.0
+- [check-aws-cloudwatch-logs] stop gracefully on timeout signal (by pyto86pri)
+- [check-aws-cloudwatch-logs] stop gracefully on timeout signal (by pyto86pri)
+- Bump github.com/mackerelio/checkers from 0.0.2 to 0.0.3 (by dependabot[bot])
+- Bump github.com/aws/aws-sdk-go from 1.43.12 to 1.43.26 (by dependabot[bot])
+- Bump github.com/mackerelio/go-osstat from 0.2.1 to 0.2.2 (by dependabot[bot])
+- [check-aws-cloudwatch-logs] use FilterLogEventsPages API (by pyto86pri)
+- Bump github.com/stretchr/testify from 1.7.0 to 1.7.1 (by dependabot[bot])
+- Bump github.com/fsouza/go-dockerclient from 1.7.9 to 1.7.10 (by dependabot[bot])
+
+* Tue Mar 15 2022 <mackerel-developers@hatena.ne.jp> - 0.41.7
+- Bump github.com/aws/aws-sdk-go from 1.43.7 to 1.43.12 (by dependabot[bot])
+- Bump github.com/shirou/gopsutil/v3 from 3.22.1 to 3.22.2 (by dependabot[bot])
+- Bump github.com/fsouza/go-dockerclient from 1.7.8 to 1.7.9 (by dependabot[bot])
+- Bump github.com/aws/aws-sdk-go from 1.42.52 to 1.43.7 (by dependabot[bot])
+- Bump github.com/go-ldap/ldap/v3 from 3.4.1 to 3.4.2 (by dependabot[bot])
+
+* Wed Feb 16 2022 <mackerel-developers@hatena.ne.jp> - 0.41.6
+- Bump github.com/fsouza/go-dockerclient from 1.7.7 to 1.7.8 (by dependabot[bot])
+- Bump github.com/aws/aws-sdk-go from 1.42.44 to 1.42.52 (by dependabot[bot])
+- upgrade Go: 1.16 -> 1.17 (by lufia)
+- Bump github.com/shirou/gopsutil/v3 from 3.21.12 to 3.22.1 (by dependabot[bot])
+- Bump github.com/fsouza/go-dockerclient from 1.7.4 to 1.7.7 (by dependabot[bot])
+
+* Wed Feb 2 2022 <mackerel-developers@hatena.ne.jp> - 0.41.5
+- Bump github.com/aws/aws-sdk-go from 1.42.35 to 1.42.44 (by dependabot[bot])
+- Bump github.com/aws/aws-sdk-go from 1.42.9 to 1.42.35 (by dependabot[bot])
+- Bump github.com/gomodule/redigo from 1.8.6 to 1.8.8 (by dependabot[bot])
+- Bump github.com/shirou/gopsutil/v3 from 3.21.10 to 3.21.12 (by dependabot[bot])
+
+* Wed Jan 12 2022 <mackerel-developers@hatena.ne.jp> - 0.41.4
+- Bump github.com/gomodule/redigo from 1.8.5 to 1.8.6 (by dependabot[bot])
+- Bump github.com/lib/pq from 1.10.3 to 1.10.4 (by dependabot[bot])
+
+* Wed Dec 1 2021 <mackerel-developers@hatena.ne.jp> - 0.41.3
+- Bump github.com/aws/aws-sdk-go from 1.40.59 to 1.42.9 (by dependabot[bot])
+- Bump github.com/mackerelio/go-osstat from 0.2.0 to 0.2.1 (by dependabot[bot])
+
 * Thu Nov 18 2021 <mackerel-developers@hatena.ne.jp> - 0.41.2
 - Bump github.com/shirou/gopsutil/v3 from 3.21.9 to 3.21.10 (by dependabot[bot])
 

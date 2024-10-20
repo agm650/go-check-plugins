@@ -2,10 +2,12 @@ package checkawscloudwatchlogs
 
 import (
 	"bytes"
+	"context"
 	"crypto/md5"
 	"encoding/json"
 	"fmt"
 	"os"
+	"os/signal"
 	"path/filepath"
 	"regexp"
 	"strings"
@@ -22,6 +24,9 @@ import (
 	"github.com/natefinch/atomic"
 )
 
+// overwritten with syscall.SIGTERM on unix environment (see check-log_unix.go)
+var defaultSignal = os.Interrupt
+
 type logOpts struct {
 	LogGroupName        string `long:"log-group-name" required:"true" value-name:"LOG-GROUP-NAME" description:"Log group name" unquote:"false"`
 	LogStreamNamePrefix string `long:"log-stream-name-prefix" value-name:"LOG-STREAM-NAME-PREFIX" description:"Log stream name prefix" unquote:"false"`
@@ -36,7 +41,10 @@ type logOpts struct {
 
 // Do the plugin
 func Do() {
-	ckr := run(os.Args[1:])
+	ctx, stop := signal.NotifyContext(context.Background(), defaultSignal)
+	defer stop()
+
+	ckr := run(ctx, os.Args[1:])
 	ckr.Name = "CloudWatch Logs"
 	ckr.Exit()
 }
@@ -107,66 +115,62 @@ type logState struct {
 	StartTime *int64
 }
 
-func (p *awsCloudwatchLogsPlugin) collect() ([]string, error) {
-	var nextToken *string
-	var startTime *int64
-	if s, err := p.loadState(); err != nil {
-		if !os.IsNotExist(err) {
-			return nil, err
-		}
-	} else {
-		if s.StartTime != nil && *s.StartTime > time.Now().Add(-time.Hour).Unix()*1000 {
-			nextToken = s.NextToken
-			startTime = s.StartTime
-		}
+func (p *awsCloudwatchLogsPlugin) collect(ctx context.Context, now time.Time) ([]string, error) {
+	s, err := p.loadState()
+	if err != nil {
+		return nil, err
 	}
-	if startTime == nil {
-		startTime = aws.Int64(time.Now().Add(-1*time.Minute).Unix() * 1000)
+	if s.StartTime == nil || *s.StartTime <= now.Add(-time.Hour).Unix()*1000 {
+		s.StartTime = aws.Int64(now.Add(-1*time.Minute).Unix() * 1000)
+		s.NextToken = nil
 	}
 	var messages []string
-	for {
-		input := &cloudwatchlogs.FilterLogEventsInput{
-			StartTime:     startTime,
-			LogGroupName:  aws.String(p.LogGroupName),
-			NextToken:     nextToken,
-			FilterPattern: aws.String(p.Pattern),
-		}
-		if p.LogStreamNamePrefix != "" {
-			input.LogStreamNamePrefix = aws.String(p.LogStreamNamePrefix)
-		}
-		output, err := p.Service.FilterLogEvents(input)
-		if err != nil {
-			return nil, err
+	input := &cloudwatchlogs.FilterLogEventsInput{
+		StartTime:     s.StartTime,
+		LogGroupName:  aws.String(p.LogGroupName),
+		NextToken:     s.NextToken,
+		FilterPattern: aws.String(p.Pattern),
+	}
+	if p.LogStreamNamePrefix != "" {
+		input.LogStreamNamePrefix = aws.String(p.LogStreamNamePrefix)
+	}
+	err = p.Service.FilterLogEventsPages(input, func(output *cloudwatchlogs.FilterLogEventsOutput, lastPage bool) bool {
+		if ctx.Err() != nil {
+			return false
 		}
 		for _, event := range output.Events {
 			messages = append(messages, *event.Message)
-			if startTime == nil || *startTime <= *event.Timestamp {
-				startTime = aws.Int64(*event.Timestamp + 1)
+			if s.StartTime == nil || *s.StartTime <= *event.Timestamp {
+				s.StartTime = aws.Int64(*event.Timestamp + 1)
 			}
 		}
-		if output.NextToken != nil {
-			nextToken = output.NextToken
+		s.NextToken = output.NextToken
+		if lastPage {
+			s.NextToken = nil
 		}
-		if nextToken != nil {
-			if err := p.saveState(&logState{nextToken, startTime}); err != nil {
-				return nil, err
-			}
-		}
-		if output.NextToken == nil {
-			break
+		err = p.saveState(s)
+		if err != nil {
+			return false
 		}
 		time.Sleep(150 * time.Millisecond)
+		return true
+	})
+	if err != nil {
+		return nil, err
 	}
 	return messages, nil
 }
 
 func (p *awsCloudwatchLogsPlugin) loadState() (*logState, error) {
+	var s logState
 	f, err := os.Open(p.StateFile)
 	if err != nil {
+		if os.IsNotExist(err) {
+			return &s, nil
+		}
 		return nil, err
 	}
 	defer f.Close()
-	var s logState
 	err = json.NewDecoder(f).Decode(&s)
 	if err != nil {
 		return nil, err
@@ -202,15 +206,15 @@ func (p *awsCloudwatchLogsPlugin) check(messages []string) *checkers.Checker {
 	return checkers.NewChecker(status, msg)
 }
 
-func (p *awsCloudwatchLogsPlugin) run() *checkers.Checker {
-	messages, err := p.collect()
+func (p *awsCloudwatchLogsPlugin) run(ctx context.Context, now time.Time) *checkers.Checker {
+	messages, err := p.collect(ctx, now)
 	if err != nil {
 		return checkers.Unknown(fmt.Sprint(err))
 	}
 	return p.check(messages)
 }
 
-func run(args []string) *checkers.Checker {
+func run(ctx context.Context, args []string) *checkers.Checker {
 	opts := &logOpts{}
 	_, err := flags.ParseArgs(opts, args)
 	if err != nil {
@@ -220,5 +224,5 @@ func run(args []string) *checkers.Checker {
 	if err != nil {
 		return checkers.Unknown(fmt.Sprint(err))
 	}
-	return p.run()
+	return p.run(ctx, time.Now())
 }

@@ -1,11 +1,10 @@
-// +build !windows
+//go:build !windows
 
 package checklog
 
 import (
 	"context"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"testing"
@@ -14,11 +13,7 @@ import (
 )
 
 func TestFindFileByInode(t *testing.T) {
-	dir, err := ioutil.TempDir("", "check-log-test")
-	if err != nil {
-		t.Errorf("something went wrong")
-	}
-	defer os.RemoveAll(dir)
+	dir := t.TempDir()
 
 	logf := filepath.Join(dir, "dummy")
 	fh, _ := os.Create(logf)
@@ -26,6 +21,7 @@ func TestFindFileByInode(t *testing.T) {
 
 	testFileExist := func() {
 		logfi, err := os.Stat(logf)
+		assert.Equal(t, err, nil, "err should be nil")
 		inode := detectInode(logfi)
 		f, err := findFileByInode(inode, dir)
 		assert.Equal(t, err, nil, "err should be nil")
@@ -42,11 +38,7 @@ func TestFindFileByInode(t *testing.T) {
 }
 
 func TestOpenOldFile(t *testing.T) {
-	dir, err := ioutil.TempDir("", "check-log-test")
-	if err != nil {
-		t.Fatalf("TempDir failed: %s", err)
-	}
-	defer os.RemoveAll(dir)
+	dir := t.TempDir()
 
 	logf := filepath.Join(dir, "dummy")
 	fh, _ := os.Create(logf)
@@ -83,11 +75,7 @@ func TestOpenOldFile(t *testing.T) {
 
 	testFoundOldFileByInode := func() {
 		// dir different from logf
-		dir, err := ioutil.TempDir("", "check-log-test")
-		if err != nil {
-			t.Fatalf("TempDir failed: %s", err)
-		}
-		defer os.RemoveAll(dir)
+		dir := t.TempDir()
 		ologf := filepath.Join(dir, "dummy.1")
 
 		ofh, _ := os.Create(ologf)
@@ -104,11 +92,7 @@ func TestOpenOldFile(t *testing.T) {
 }
 
 func TestRunTraceInode(t *testing.T) {
-	dir, err := ioutil.TempDir("", "check-log-test")
-	if err != nil {
-		t.Errorf("something went wrong")
-	}
-	defer os.RemoveAll(dir)
+	dir := t.TempDir()
 
 	logf := filepath.Join(dir, "dummy")
 	fh, _ := os.Create(logf)

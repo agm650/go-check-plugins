@@ -1,3 +1,261 @@
+mackerel-check-plugins (0.45.0-1.v2) stable; urgency=low
+
+  * Bump golang.org/x/crypto from 0.6.0 to 0.13.0 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/771>
+  * Bump github.com/shirou/gopsutil/v3 from 3.23.1 to 3.23.8 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/770>
+  * [check-tcp] Supports option to monitor that ports are closed. (by tukaelu)
+    <https://github.com/mackerelio/go-check-plugins/pull/767>
+  * Improve ntservice (by tukaelu)
+    <https://github.com/mackerelio/go-check-plugins/pull/765>
+  * Remove old rpm packaging (by yseto)
+    <https://github.com/mackerelio/go-check-plugins/pull/764>
+  * Bump github.com/aws/aws-sdk-go from 1.44.199 to 1.44.271 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/762>
+  * Bump actions/setup-go from 3 to 4 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/737>
+  * Bump github.com/mackerelio/go-osstat from 0.2.3 to 0.2.4 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/735>
+
+ -- mackerel <mackerel-developers@hatena.ne.jp>  Fri, 22 Sep 2023 02:52:42 +0000
+
+mackerel-check-plugins (0.44.1-1.v2) stable; urgency=low
+
+  * added build tests. (by yseto)
+    <https://github.com/mackerelio/go-check-plugins/pull/760>
+
+ -- mackerel <mackerel-developers@hatena.ne.jp>  Thu, 13 Jul 2023 06:30:13 +0000
+
+mackerel-check-plugins (0.44.0-1.v2) stable; urgency=low
+
+  * Bump github.com/stretchr/testify from 1.8.1 to 1.8.2 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/722>
+  * fix gosimple, ineffassign (by wafuwafu13)
+    <https://github.com/mackerelio/go-check-plugins/pull/720>
+  * Bump github.com/containerd/containerd from 1.6.14 to 1.6.18 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/717>
+  * check-dns: add `expected-string` option (by wafuwafu13)
+    <https://github.com/mackerelio/go-check-plugins/pull/715>
+  * Bump github.com/aws/aws-sdk-go from 1.44.189 to 1.44.199 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/714>
+  * Bump golang.org/x/crypto from 0.5.0 to 0.6.0 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/713>
+  * Bump github.com/fsouza/go-dockerclient from 1.9.3 to 1.9.4 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/712>
+  * Bump golang.org/x/text from 0.6.0 to 0.7.0 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/711>
+  * Bump golang.org/x/sys from 0.4.0 to 0.5.0 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/710>
+  * added dns plugin on package (by yseto)
+    <https://github.com/mackerelio/go-check-plugins/pull/709>
+  * Remove `circle.yml` (by wafuwafu13)
+    <https://github.com/mackerelio/go-check-plugins/pull/708>
+  * Bump github.com/shirou/gopsutil/v3 from 3.22.12 to 3.23.1 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/706>
+  * Add check-dns plugin (by wafuwafu13)
+    <https://github.com/mackerelio/go-check-plugins/pull/704>
+
+ -- mackerel <mackerel-developers@hatena.ne.jp>  Mon, 27 Feb 2023 10:10:02 +0000
+
+mackerel-check-plugins (0.43.0-1.v2) stable; urgency=low
+
+  * fix generate docs (by yseto)
+    <https://github.com/mackerelio/go-check-plugins/pull/703>
+  * Bump actions/checkout from 2 to 3 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/702>
+  * Bump actions/setup-go from 2 to 3 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/701>
+  * Bump actions/cache from 2 to 3 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/700>
+  * Bump actions/upload-artifact from 2 to 3 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/699>
+  * Bump actions/download-artifact from 2 to 3 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/698>
+  * Bump github.com/aws/aws-sdk-go from 1.44.157 to 1.44.189 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/697>
+  * Enables Dependabot version updates for GitHub Actions (by Arthur1)
+    <https://github.com/mackerelio/go-check-plugins/pull/696>
+  * Stop build for apt v1 (by Arthur1)
+    <https://github.com/mackerelio/go-check-plugins/pull/695>
+  * Bump github.com/fsouza/go-dockerclient from 1.9.0 to 1.9.3 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/694>
+  * [check-http] add test.sh (by lufia)
+    <https://github.com/mackerelio/go-check-plugins/pull/692>
+  * check-ssl-cert: add `ca-file`, `cert-file`, `key-file`, `no-check-certificate` options (by wafuwafu13)
+    <https://github.com/mackerelio/go-check-plugins/pull/690>
+  * Bump golang.org/x/text from 0.5.0 to 0.6.0 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/684>
+  * Bump golang.org/x/crypto from 0.4.0 to 0.5.0 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/682>
+  * Bump github.com/shirou/gopsutil/v3 from 3.22.11 to 3.22.12 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/679>
+  * Bump github.com/go-sql-driver/mysql from 1.6.0 to 1.7.0 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/671>
+
+ -- mackerel <mackerel-developers@hatena.ne.jp>  Wed, 1 Feb 2023 06:05:22 +0000
+
+mackerel-check-plugins (0.42.4-1.v2) stable; urgency=low
+
+  * check-cert-file: add test (by wafuwafu13)
+    <https://github.com/mackerelio/go-check-plugins/pull/687>
+  * test: use `T.TempDir` to create temporary test directory (by Juneezee)
+    <https://github.com/mackerelio/go-check-plugins/pull/686>
+  * combine lint, lint-windows, fix test on windows. (by yseto)
+    <https://github.com/mackerelio/go-check-plugins/pull/678>
+  * added compile option, fix packaging format (by yseto)
+    <https://github.com/mackerelio/go-check-plugins/pull/676>
+  * Update dependencies (by lufia)
+    <https://github.com/mackerelio/go-check-plugins/pull/674>
+  * Bump github.com/aws/aws-sdk-go from 1.44.116 to 1.44.157 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/673>
+
+ -- mackerel <mackerel-developers@hatena.ne.jp>  Wed, 18 Jan 2023 06:21:28 +0000
+
+mackerel-check-plugins (0.42.3-1.v2) stable; urgency=low
+
+  * Bump golang.org/x/text from 0.3.7 to 0.4.0 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/658>
+  * Bump github.com/aws/aws-sdk-go from 1.44.56 to 1.44.116 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/656>
+  * Bump github.com/fsouza/go-dockerclient from 1.8.3 to 1.9.0 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/655>
+  * use Go 1.19 on build (by yseto)
+    <https://github.com/mackerelio/go-check-plugins/pull/654>
+  * Bump github.com/shirou/gopsutil/v3 from 3.22.2 to 3.22.9 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/652>
+  * Bump github.com/lib/pq from 1.10.6 to 1.10.7 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/648>
+  * Bump github.com/mackerelio/checkers from 0.0.3 to 0.0.4 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/645>
+  * [uptime] rewite to testable and add test (by wafuwafu13)
+    <https://github.com/mackerelio/go-check-plugins/pull/643>
+  * go.mod from 1.16 to 1.18 (by yseto)
+    <https://github.com/mackerelio/go-check-plugins/pull/642>
+  * added test check-file-age (by yseto)
+    <https://github.com/mackerelio/go-check-plugins/pull/641>
+  * added test check-file-size (by yseto)
+    <https://github.com/mackerelio/go-check-plugins/pull/640>
+  * Bump github.com/mackerelio/go-osstat from 0.2.2 to 0.2.3 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/638>
+  * Bump github.com/fsouza/go-dockerclient from 1.8.1 to 1.8.3 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/637>
+  * Bump github.com/go-ldap/ldap/v3 from 3.4.3 to 3.4.4 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/631>
+  * Improve tests for check-mysql (by susisu)
+    <https://github.com/mackerelio/go-check-plugins/pull/629>
+
+ -- mackerel <mackerel-developers@hatena.ne.jp>  Thu, 20 Oct 2022 02:30:47 +0000
+
+mackerel-check-plugins (0.42.2-1.v2) stable; urgency=low
+
+  * Ignores fuse.portal partitions (by lufia)
+    <https://github.com/mackerelio/go-check-plugins/pull/626>
+  * Bump github.com/aws/aws-sdk-go from 1.44.37 to 1.44.56 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/623>
+  * Bump github.com/gomodule/redigo from 1.8.8 to 1.8.9 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/620>
+  * Bump github.com/stretchr/testify from 1.7.1 to 1.8.0 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/618>
+  * Bump github.com/fsouza/go-dockerclient from 1.7.10 to 1.8.1 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/610>
+  * Bump github.com/lib/pq from 1.10.4 to 1.10.6 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/603>
+  * Bump github.com/jmoiron/sqlx from 1.3.4 to 1.3.5 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/595>
+  * Bump github.com/go-ldap/ldap/v3 from 3.4.2 to 3.4.3 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/592>
+
+ -- mackerel <mackerel-developers@hatena.ne.jp>  Wed, 27 Jul 2022 06:13:10 +0000
+
+mackerel-check-plugins (0.42.1-1.v2) stable; urgency=low
+
+  * Bump github.com/aws/aws-sdk-go from 1.43.26 to 1.44.37 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/612>
+
+ -- mackerel <mackerel-developers@hatena.ne.jp>  Wed, 22 Jun 2022 06:35:59 +0000
+
+mackerel-check-plugins (0.42.0-1.v2) stable; urgency=low
+
+  * [check-aws-cloudwatch-logs] stop gracefully on timeout signal (by pyto86pri)
+    <https://github.com/mackerelio/go-check-plugins/pull/588>
+  * [check-aws-cloudwatch-logs] stop gracefully on timeout signal (by pyto86pri)
+    <https://github.com/mackerelio/go-check-plugins/pull/587>
+  * Bump github.com/mackerelio/checkers from 0.0.2 to 0.0.3 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/586>
+  * Bump github.com/aws/aws-sdk-go from 1.43.12 to 1.43.26 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/585>
+  * Bump github.com/mackerelio/go-osstat from 0.2.1 to 0.2.2 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/584>
+  * [check-aws-cloudwatch-logs] use FilterLogEventsPages API (by pyto86pri)
+    <https://github.com/mackerelio/go-check-plugins/pull/583>
+  * Bump github.com/stretchr/testify from 1.7.0 to 1.7.1 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/581>
+  * Bump github.com/fsouza/go-dockerclient from 1.7.9 to 1.7.10 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/579>
+
+ -- mackerel <mackerel-developers@hatena.ne.jp>  Wed, 30 Mar 2022 08:26:43 +0000
+
+mackerel-check-plugins (0.41.7-1.v2) stable; urgency=low
+
+  * Bump github.com/aws/aws-sdk-go from 1.43.7 to 1.43.12 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/577>
+  * Bump github.com/shirou/gopsutil/v3 from 3.22.1 to 3.22.2 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/576>
+  * Bump github.com/fsouza/go-dockerclient from 1.7.8 to 1.7.9 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/574>
+  * Bump github.com/aws/aws-sdk-go from 1.42.52 to 1.43.7 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/573>
+  * Bump github.com/go-ldap/ldap/v3 from 3.4.1 to 3.4.2 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/571>
+
+ -- mackerel <mackerel-developers@hatena.ne.jp>  Tue, 15 Mar 2022 03:41:40 +0000
+
+mackerel-check-plugins (0.41.6-1.v2) stable; urgency=low
+
+  * Bump github.com/fsouza/go-dockerclient from 1.7.7 to 1.7.8 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/569>
+  * Bump github.com/aws/aws-sdk-go from 1.42.44 to 1.42.52 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/568>
+  * upgrade Go: 1.16 -> 1.17 (by lufia)
+    <https://github.com/mackerelio/go-check-plugins/pull/567>
+  * Bump github.com/shirou/gopsutil/v3 from 3.21.12 to 3.22.1 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/565>
+  * Bump github.com/fsouza/go-dockerclient from 1.7.4 to 1.7.7 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/558>
+
+ -- mackerel <mackerel-developers@hatena.ne.jp>  Wed, 16 Feb 2022 02:54:15 +0000
+
+mackerel-check-plugins (0.41.5-1.v2) stable; urgency=low
+
+  * Bump github.com/aws/aws-sdk-go from 1.42.35 to 1.42.44 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/563>
+  * Bump github.com/aws/aws-sdk-go from 1.42.9 to 1.42.35 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/561>
+  * Bump github.com/gomodule/redigo from 1.8.6 to 1.8.8 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/559>
+  * Bump github.com/shirou/gopsutil/v3 from 3.21.10 to 3.21.12 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/556>
+
+ -- mackerel <mackerel-developers@hatena.ne.jp>  Wed, 2 Feb 2022 02:21:16 +0000
+
+mackerel-check-plugins (0.41.4-1.v2) stable; urgency=low
+
+  * Bump github.com/gomodule/redigo from 1.8.5 to 1.8.6 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/548>
+  * Bump github.com/lib/pq from 1.10.3 to 1.10.4 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/542>
+
+ -- mackerel <mackerel-developers@hatena.ne.jp>  Wed, 12 Jan 2022 05:30:59 +0000
+
+mackerel-check-plugins (0.41.3-1.v2) stable; urgency=low
+
+  * Bump github.com/aws/aws-sdk-go from 1.40.59 to 1.42.9 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/544>
+  * Bump github.com/mackerelio/go-osstat from 0.2.0 to 0.2.1 (by dependabot[bot])
+    <https://github.com/mackerelio/go-check-plugins/pull/535>
+
+ -- mackerel <mackerel-developers@hatena.ne.jp>  Wed, 1 Dec 2021 05:25:43 +0000
+
 mackerel-check-plugins (0.41.2-1.v2) stable; urgency=low
 
   * Bump github.com/shirou/gopsutil/v3 from 3.21.9 to 3.21.10 (by dependabot[bot])

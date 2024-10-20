@@ -1,5 +1,155 @@
 # Changelog
 
+## 0.45.0 (2023-09-22)
+
+* Bump golang.org/x/crypto from 0.6.0 to 0.13.0 #771 (dependabot[bot])
+* Bump github.com/shirou/gopsutil/v3 from 3.23.1 to 3.23.8 #770 (dependabot[bot])
+* [check-tcp] Supports option to monitor that ports are closed. #767 (tukaelu)
+* Improve ntservice #765 (tukaelu)
+* Remove old rpm packaging #764 (yseto)
+* Bump github.com/aws/aws-sdk-go from 1.44.199 to 1.44.271 #762 (dependabot[bot])
+* Bump actions/setup-go from 3 to 4 #737 (dependabot[bot])
+* Bump github.com/mackerelio/go-osstat from 0.2.3 to 0.2.4 #735 (dependabot[bot])
+
+
+## 0.44.1 (2023-07-13)
+
+* added build tests. #760 (yseto)
+
+
+## 0.44.0 (2023-02-27)
+
+* Bump github.com/stretchr/testify from 1.8.1 to 1.8.2 #722 (dependabot[bot])
+* fix gosimple, ineffassign #720 (wafuwafu13)
+* Bump github.com/containerd/containerd from 1.6.14 to 1.6.18 #717 (dependabot[bot])
+* check-dns: add `expected-string` option #715 (wafuwafu13)
+* Bump github.com/aws/aws-sdk-go from 1.44.189 to 1.44.199 #714 (dependabot[bot])
+* Bump golang.org/x/crypto from 0.5.0 to 0.6.0 #713 (dependabot[bot])
+* Bump github.com/fsouza/go-dockerclient from 1.9.3 to 1.9.4 #712 (dependabot[bot])
+* Bump golang.org/x/text from 0.6.0 to 0.7.0 #711 (dependabot[bot])
+* Bump golang.org/x/sys from 0.4.0 to 0.5.0 #710 (dependabot[bot])
+* added dns plugin on package #709 (yseto)
+* Remove `circle.yml` #708 (wafuwafu13)
+* Bump github.com/shirou/gopsutil/v3 from 3.22.12 to 3.23.1 #706 (dependabot[bot])
+* Add check-dns plugin #704 (wafuwafu13)
+
+
+## 0.43.0 (2023-02-01)
+
+* fix generate docs #703 (yseto)
+* Bump actions/checkout from 2 to 3 #702 (dependabot[bot])
+* Bump actions/setup-go from 2 to 3 #701 (dependabot[bot])
+* Bump actions/cache from 2 to 3 #700 (dependabot[bot])
+* Bump actions/upload-artifact from 2 to 3 #699 (dependabot[bot])
+* Bump actions/download-artifact from 2 to 3 #698 (dependabot[bot])
+* Bump github.com/aws/aws-sdk-go from 1.44.157 to 1.44.189 #697 (dependabot[bot])
+* Enables Dependabot version updates for GitHub Actions #696 (Arthur1)
+* Stop build for apt v1 #695 (Arthur1)
+* Bump github.com/fsouza/go-dockerclient from 1.9.0 to 1.9.3 #694 (dependabot[bot])
+* [check-http] add test.sh #692 (lufia)
+* check-ssl-cert: add `ca-file`, `cert-file`, `key-file`, `no-check-certificate` options #690 (wafuwafu13)
+* Bump golang.org/x/text from 0.5.0 to 0.6.0 #684 (dependabot[bot])
+* Bump golang.org/x/crypto from 0.4.0 to 0.5.0 #682 (dependabot[bot])
+* Bump github.com/shirou/gopsutil/v3 from 3.22.11 to 3.22.12 #679 (dependabot[bot])
+* Bump github.com/go-sql-driver/mysql from 1.6.0 to 1.7.0 #671 (dependabot[bot])
+
+
+## 0.42.4 (2023-01-18)
+
+* check-cert-file: add test #687 (wafuwafu13)
+* test: use `T.TempDir` to create temporary test directory #686 (Juneezee)
+* combine lint, lint-windows, fix test on windows. #678 (yseto)
+* added compile option, fix packaging format #676 (yseto)
+* Update dependencies #674 (lufia)
+* Bump github.com/aws/aws-sdk-go from 1.44.116 to 1.44.157 #673 (dependabot[bot])
+
+
+## 0.42.3 (2022-10-20)
+
+* Bump golang.org/x/text from 0.3.7 to 0.4.0 #658 (dependabot[bot])
+* Bump github.com/aws/aws-sdk-go from 1.44.56 to 1.44.116 #656 (dependabot[bot])
+* Bump github.com/fsouza/go-dockerclient from 1.8.3 to 1.9.0 #655 (dependabot[bot])
+* use Go 1.19 on build #654 (yseto)
+* Bump github.com/shirou/gopsutil/v3 from 3.22.2 to 3.22.9 #652 (dependabot[bot])
+* Bump github.com/lib/pq from 1.10.6 to 1.10.7 #648 (dependabot[bot])
+* Bump github.com/mackerelio/checkers from 0.0.3 to 0.0.4 #645 (dependabot[bot])
+* [uptime] rewite to testable and add test #643 (wafuwafu13)
+* go.mod from 1.16 to 1.18 #642 (yseto)
+* added test check-file-age #641 (yseto)
+* added test check-file-size #640 (yseto)
+* Bump github.com/mackerelio/go-osstat from 0.2.2 to 0.2.3 #638 (dependabot[bot])
+* Bump github.com/fsouza/go-dockerclient from 1.8.1 to 1.8.3 #637 (dependabot[bot])
+* Bump github.com/go-ldap/ldap/v3 from 3.4.3 to 3.4.4 #631 (dependabot[bot])
+* Improve tests for check-mysql #629 (susisu)
+
+
+## 0.42.2 (2022-07-27)
+
+* Ignores fuse.portal partitions #626 (lufia)
+* Bump github.com/aws/aws-sdk-go from 1.44.37 to 1.44.56 #623 (dependabot[bot])
+* Bump github.com/gomodule/redigo from 1.8.8 to 1.8.9 #620 (dependabot[bot])
+* Bump github.com/stretchr/testify from 1.7.1 to 1.8.0 #618 (dependabot[bot])
+* Bump github.com/fsouza/go-dockerclient from 1.7.10 to 1.8.1 #610 (dependabot[bot])
+* Bump github.com/lib/pq from 1.10.4 to 1.10.6 #603 (dependabot[bot])
+* Bump github.com/jmoiron/sqlx from 1.3.4 to 1.3.5 #595 (dependabot[bot])
+* Bump github.com/go-ldap/ldap/v3 from 3.4.2 to 3.4.3 #592 (dependabot[bot])
+
+
+## 0.42.1 (2022-06-22)
+
+* Bump github.com/aws/aws-sdk-go from 1.43.26 to 1.44.37 #612 (dependabot[bot])
+
+
+## 0.42.0 (2022-03-30)
+
+* [check-aws-cloudwatch-logs] stop gracefully on timeout signal #588 (pyto86pri)
+* [check-aws-cloudwatch-logs] stop gracefully on timeout signal #587 (pyto86pri)
+* Bump github.com/mackerelio/checkers from 0.0.2 to 0.0.3 #586 (dependabot[bot])
+* Bump github.com/aws/aws-sdk-go from 1.43.12 to 1.43.26 #585 (dependabot[bot])
+* Bump github.com/mackerelio/go-osstat from 0.2.1 to 0.2.2 #584 (dependabot[bot])
+* [check-aws-cloudwatch-logs] use FilterLogEventsPages API #583 (pyto86pri)
+* Bump github.com/stretchr/testify from 1.7.0 to 1.7.1 #581 (dependabot[bot])
+* Bump github.com/fsouza/go-dockerclient from 1.7.9 to 1.7.10 #579 (dependabot[bot])
+
+
+## 0.41.7 (2022-03-15)
+
+* Bump github.com/aws/aws-sdk-go from 1.43.7 to 1.43.12 #577 (dependabot[bot])
+* Bump github.com/shirou/gopsutil/v3 from 3.22.1 to 3.22.2 #576 (dependabot[bot])
+* Bump github.com/fsouza/go-dockerclient from 1.7.8 to 1.7.9 #574 (dependabot[bot])
+* Bump github.com/aws/aws-sdk-go from 1.42.52 to 1.43.7 #573 (dependabot[bot])
+* Bump github.com/go-ldap/ldap/v3 from 3.4.1 to 3.4.2 #571 (dependabot[bot])
+
+
+## 0.41.6 (2022-02-16)
+
+* Bump github.com/fsouza/go-dockerclient from 1.7.7 to 1.7.8 #569 (dependabot[bot])
+* Bump github.com/aws/aws-sdk-go from 1.42.44 to 1.42.52 #568 (dependabot[bot])
+* upgrade Go: 1.16 -> 1.17 #567 (lufia)
+* Bump github.com/shirou/gopsutil/v3 from 3.21.12 to 3.22.1 #565 (dependabot[bot])
+* Bump github.com/fsouza/go-dockerclient from 1.7.4 to 1.7.7 #558 (dependabot[bot])
+
+
+## 0.41.5 (2022-02-02)
+
+* Bump github.com/aws/aws-sdk-go from 1.42.35 to 1.42.44 #563 (dependabot[bot])
+* Bump github.com/aws/aws-sdk-go from 1.42.9 to 1.42.35 #561 (dependabot[bot])
+* Bump github.com/gomodule/redigo from 1.8.6 to 1.8.8 #559 (dependabot[bot])
+* Bump github.com/shirou/gopsutil/v3 from 3.21.10 to 3.21.12 #556 (dependabot[bot])
+
+
+## 0.41.4 (2022-01-12)
+
+* Bump github.com/gomodule/redigo from 1.8.5 to 1.8.6 #548 (dependabot[bot])
+* Bump github.com/lib/pq from 1.10.3 to 1.10.4 #542 (dependabot[bot])
+
+
+## 0.41.3 (2021-12-01)
+
+* Bump github.com/aws/aws-sdk-go from 1.40.59 to 1.42.9 #544 (dependabot[bot])
+* Bump github.com/mackerelio/go-osstat from 0.2.0 to 0.2.1 #535 (dependabot[bot])
+
+
 ## 0.41.2 (2021-11-18)
 
 * Bump github.com/shirou/gopsutil/v3 from 3.21.9 to 3.21.10 #539 (dependabot[bot])
